@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Development & My Vision - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+          /* ================= 1. STANDARD NAVBAR ================= */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14.5px;
+            font-weight: 600;
+            padding: 8px 0;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0f172a;
+        }
+
+        /* Dropdown Content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: #374151;
+            font-size: 13.5px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Bar Controls */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #search-toggle { display: none; }
+        .search-icon-btn { cursor: pointer; font-size: 16px; color: #374151; }
+        
+        .search-btn {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 200;
+            justify-content: center; align-items: flex-start; padding-top: 80px;
+        }
+
+        #search-toggle:checked ~ .search-modal { display: flex; }
+
+        .search-box-inner {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .search-box-inner input { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; }
+        .search-box-inner button { background: #000000; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+        .close-btn { background: #6b7280; color: #ffffff; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+
+
+        /* Container Layout */
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .content-box {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .vision-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0066cc;
+        }
+ /* Footer */
+        footer {
+            background-color: #111827;
+            color: #fff;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .social-icons a {
+            color: #fff;
+            background: #374151;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .copyright-bar {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .issues-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+     <div class="navbar">
+        <a href="index.html" class="logo-section">
+            <span class="logo-badge">H</span>
+            <span class="logo-text">HORANA</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown">
+                <span class="dropbtn">About Horana <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="about.html">About Horana</a>
+                    <a href="population.html">Population & Demographics</a>
+                    <a href="natural-features.html">Natural Features</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="history.html">History</a>
+                    <a href="location.html">Location</a>
+                    <a href="landmarks.html">Landmarks</a>
+                    <a href="geoportal.html">Geo-Portal Data</a>
+                    <a href="facilities.html">Facilities & Services</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="issues.html">Current Issues</a>
+                    <a href="development.html">Future Development</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <input type="checkbox" id="search-toggle">
+            <label for="search-toggle" class="search-icon-btn"><i class="fa fa-search"></i></label>
+            <label for="search-toggle" class="search-btn">Search</label>
+
+            <div class="search-modal">
+                <div class="search-box-inner">
+                    <input type="text" placeholder="Search Horana topics...">
+                    <button type="button">Search</button>
+                    <label for="search-toggle" class="close-btn">X</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="main-heading">Future Development & My Vision</h1>
+
+        <div class="content-box">
+            <div class="section-title">1. My Vision for Horana</div>
+            <p class="vision-text">
+                To transform Horana into a sustainable, smart, and well-connected regional hub that balances rapid industrial growth with environmental protection and a high quality of life for its residents.
+            </p>
+        </div>
+
+        <div class="content-box">
+            <div class="section-title">2. Key Future Development Properties</div>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="propertyName">Property / Project Title:</label>
+                    <input type="text" id="propertyName" name="propertyName" placeholder="Enter development proposal name">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="infrastructure">Infrastructure & Roads</option>
+                        <option value="environment">Eco-Park & Green Zones</option>
+                        <option value="industrial">Smart Industrial Zone</option>
+                        <option value="urban">Urban Renewal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Proposal Details:</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Describe the future development idea..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Proposal</button>
+            </form>
+        </div>
+
+
+    <p>   
+         <b>  <h4>References </h4> </b>
+    <h5>
+<br>
+•	City Population. (n.d.). Horana (Divisional Secretariat, Sri Lanka): Population statistics, charts, map and location.<a href="https://www.citypopulation.de/en/srilanka/admin/kalutara/1309__horana/"> https://www.citypopulation.de/en/srilanka/admin/kalutara/1309__horana/ </a>
+<br>
+•	Google. (n.d.). Google Earth Pro [Computer software].<a href="https://earth.google.com/"> https://earth.google.com/ </a>
+<br>
+•	Google. (n.d.). Google Maps.<a href="https://maps.google.com/">https://maps.google.com/ </a>
+<br>
+•	Lankapura. (1962). Panadura to Ratnapura Road, Sri Lanka. <a href="https://share.google/pJulHGEwsMe9Paxzg">  https://share.google/pJulHGEwsMe9Paxzg </a>
+<br>
+•	OpenStreetMap contributors. (n.d.). OpenStreetMap.<a href="https://www.openstreetmap.org/"> https://www.openstreetmap.org/ </a>
+<br>
+•	PropertyGuide. (n.d.). Horana area guide: Discover insights & price trends. <a href="https://propertyguide.lk/area-guide/horana/">  https://propertyguide.lk/area-guide/horana/  </a>
+<br>
+•	QGIS Development Team. (n.d.). QGIS Geographic Information System [Computer software]. <a href="https://qgis.org/"> https://qgis.org/    </a>
+<br>
+•	ප්‍රාදේශීය ලේකම් කාර්යාලය, හොරණ. (2024). සම්පත් පැතිකඩ 2024.
+<br>
+    </h5>
+        </p
+
+    </div>
+
+    <footer>
+      <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Contact Info</a>
+                <a href="#">Useful Info</a>
+            </div>
+            <div class="social-icons">
+                <span>Social Media Icons</span>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © Copyright 2026 Horana Web Project. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
