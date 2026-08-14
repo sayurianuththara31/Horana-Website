@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+        }
+
+        /* ================= 1. STANDARD UNIFORM NAVBAR ================= */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14.5px;
+            font-weight: 600;
+            padding: 8px 0;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0f172a;
+        }
+
+        /* Dropdown Content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: #374151;
+            font-size: 13.5px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Bar Controls */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #search-toggle { display: none; }
+        .search-icon-btn { cursor: pointer; font-size: 16px; color: #374151; }
+        
+        .search-btn {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 200;
+            justify-content: center; align-items: flex-start; padding-top: 80px;
+        }
+
+        #search-toggle:checked ~ .search-modal { display: flex; }
+
+        .search-box-inner {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .search-box-inner input { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; }
+        .search-box-inner button { background: #1e293b; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+        .close-btn { background: #6b7280; color: #ffffff; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+
+        /* ================= 2. MAIN CONTAINER SIZE ================= */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 40px;
+        }
+
+        .location-info {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        .location-info p {
+            margin-bottom: 16px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            padding: 6px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Map එක වෙනුවට Photo Container එක */
+        .photo-container {
+            width: 100%;
+            height: 420px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-color: #f1f5f9;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Evolution Section (All 4 Years: 1985, 2005, 2010, 2025) */
+        .evolution-wrapper {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .evolution-grid-four {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .ev-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .ev-img-box {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #e2e8f0;
+            margin-bottom: 10px;
+        }
+
+        .ev-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ev-caption {
+            font-size: 15px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        /* Bottom Next Button */
+        .next-btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .next-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 24px;
+            border-radius: 6px;
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .next-btn:hover {
+            background: #f8fafc;
+        }
+
+        /* ================= 3. STANDARD UNIFORM DARK FOOTER ================= */
+        footer {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 60px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: #ffffff; }
+
+        .social-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            background-color: #1e293b;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .copyright-bar {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .container { padding: 20px; }
+            .location-grid { grid-template-columns: 1fr; }
+            .evolution-grid-four { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; }
+            footer { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html" class="logo-section">
+            <span class="logo-badge">H</span>
+            <span class="logo-text">HORANA</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown">
+                <span class="dropbtn">About Horana <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="about.html">About Horana</a>
+                    <a href="population.html">Population & Demographics</a>
+                    <a href="natural-features.html">Natural Features</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="history.html">History</a>
+                    <a href="location.html">Location</a>
+                    <a href="landmarks.html">Landmarks</a>
+                    <a href="geoportal.html">Geo-Portal Data</a>
+                    <a href="facilities.html">Facilities & Services</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="issues.html">Current Issues</a>
+                    <a href="development.html">Future Development</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <input type="checkbox" id="search-toggle">
+            <label for="search-toggle" class="search-icon-btn"><i class="fa fa-search"></i></label>
+            <label for="search-toggle" class="search-btn">Search</label>
+
+            <div class="search-modal">
+                <div class="search-box-inner">
+                    <input type="text" placeholder="Search Horana topics...">
+                    <button type="button">Search</button>
+                    <label for="search-toggle" class="close-btn">X</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <h1 class="main-title">LOCATION</h1>
+
+        <div class="location-grid">
+            <div class="location-info">
+                <p>
+                    Horana is situated in the <strong>Kalutara District</strong> within the Western Province of Sri Lanka. Positioned approximately 42 kilometers southeast of Colombo, Horana serves as a key junction connecting major commercial routes.
+                </p>
+                <p>
+                    Its strategic geographic placement makes it a vital transport and trade gateway between coastal commercial hubs and interior agricultural regions.
+                </p>
+
+                <div class="info-card">
+                    <h3>Key Geographic Details</h3>
+                    <ul>
+                        <li><span>District</span> <strong>Kalutara</strong></li>
+                        <li><span>Province</span> <strong>Western Province</strong></li>
+                        <li><span>Distance from Colombo</span> <strong>~42 km</strong></li>
+                        <li><span>Elevation</span> <strong>28 m above sea level</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="photo-container">
+                <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\Location Map.jpeg" alt="Horana Location Photo" >
+            </div>
+        </div>
+
+        <div class="evolution-wrapper">
+            <div class="evolution-grid-four">
+                
+                <div class="ev-card">
+                    <div class="ev-img-box">
+                        <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\1985.png" alt="1985" >
+                    </div>
+                    <div class="ev-caption">1985</div>
+                </div>
+
+                <div class="ev-card">
+                    <div class="ev-img-box">
+                        <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\2010 (2).png" alt="2005">
+                    </div>
+                    <div class="ev-caption">2010</div>
+                </div>
+
+                <div class="ev-card">
+                    <div class="ev-img-box">
+                        <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\2015 (2).png" alt="2010" >
+                    </div>
+                    <div class="ev-caption">2015</div>
+                </div>
+
+                <div class="ev-card">
+                    <div class="ev-img-box">
+                        <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\2025.png" alt="2025" >
+                    </div>
+                    <div class="ev-caption">2025</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="next-btn-wrapper">
+            <a href="population.html" class="next-btn">Next →</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Contact Info</a>
+                <a href="#">Useful Info</a>
+            </div>
+            <div class="social-icons">
+                <span>Social Media Icons</span>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © Copyright 2026 Horana Web Project. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Issues & Challenges - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        /* ================= 1. STANDARD UNIFORM NAVBAR ================= */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14.5px;
+            font-weight: 600;
+            padding: 8px 0;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0f172a;
+        }
+
+        /* Dropdown Content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: #374151;
+            font-size: 13.5px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Bar Controls */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #search-toggle { display: none; }
+        .search-icon-btn { cursor: pointer; font-size: 16px; color: #374151; }
+        
+        .search-btn {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 200;
+            justify-content: center; align-items: flex-start; padding-top: 80px;
+        }
+
+        #search-toggle:checked ~ .search-modal { display: flex; }
+
+        .search-box-inner {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .search-box-inner input { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; }
+        .search-box-inner button { background: #1e293b; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+        .close-btn { background: #6b7280; color: #ffffff; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 6 Issues Grid */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .issue-card {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .issue-title {
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #111;
+            max-width: 75%;
+            line-height: 1.2;
+        }
+
+        .issue-icon {
+            font-size: 22px;
+            color: #444;
+        }
+
+        .issue-desc {
+            font-size: 12.5px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Community Feedback Box */
+        .feedback-card {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .feedback-card h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .comment-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            background-color: #fafafa;
+        }
+
+        .comment-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .comment-box textarea {
+            width: 100%;
+            height: 60px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 8px;
+            font-family: inherit;
+            font-size: 13px;
+            resize: vertical;
+            outline: none;
+        }
+
+        .comment-box textarea:focus {
+            border-color: #0066cc;
+        }
+
+        .feedback-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            background-color: #111827;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #374151;
+        }
+
+        .next-btn {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #111;
+            padding: 6px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            display: inline-block;
+        }
+
+        .next-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #fff;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .social-icons a {
+            color: #fff;
+            background: #374151;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .copyright-bar {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .issues-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <div class="navbar">
+        <a href="index.html" class="logo-section">
+            <span class="logo-badge">H</span>
+            <span class="logo-text">HORANA</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown">
+                <span class="dropbtn">About Horana <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="about.html">About Horana</a>
+                    <a href="population.html">Population & Demographics</a>
+                    <a href="natural-features.html">Natural Features</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="history.html">History</a>
+                    <a href="location.html">Location</a>
+                    <a href="landmarks.html">Landmarks</a>
+                    <a href="geoportal.html">Geo-Portal Data</a>
+                    <a href="facilities.html">Facilities & Services</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="issues.html">Current Issues</a>
+                    <a href="development.html">Future Development</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <input type="checkbox" id="search-toggle">
+            <label for="search-toggle" class="search-icon-btn"><i class="fa fa-search"></i></label>
+            <label for="search-toggle" class="search-btn">Search</label>
+
+            <div class="search-modal">
+                <div class="search-box-inner">
+                    <input type="text" placeholder="Search Horana topics...">
+                    <button type="button">Search</button>
+                    <label for="search-toggle" class="close-btn">X</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="main-heading">CURRENT ISSUES AND CHALLENGES</h1>
+
+        <div class="issues-grid">
+            
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">TRAFFIC CONGESTION</div>
+                    <div class="issue-icon"><i class="fa-solid fa-car-side"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Addressing daily gridlock at Horana town center during peak hours.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">FLOODING</div>
+                    <div class="issue-icon"><i class="fa-solid fa-water"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Managing flash flood risks during monsoon seasons near natural waterways.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">WASTE MANAGEMENT</div>
+                    <div class="issue-icon"><i class="fa-solid fa-trash-can"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Implementing sustainable garbage collection and recycling programs for a cleaner city.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">AIR POLLUTION</div>
+                    <div class="issue-icon"><i class="fa-solid fa-smog"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Monitoring and reducing emissions from increasing vehicle numbers and industrial zones.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">NOISE POLLUTION</div>
+                    <div class="issue-icon"><i class="fa-solid fa-volume-high"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Creating noise-sensitive zones around residential and educational areas.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-header">
+                    <div class="issue-title">LOSS OF GARDEN SPACE</div>
+                    <div class="issue-icon"><i class="fa-solid fa-tree"></i></div>
+                </div>
+                <div class="issue-desc">
+                    Protecting and restoring green areas and urban gardens amidst rapid urban development.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feedback-card">
+            <h2>COMMUNITY FEEDBACK</h2>
+            
+            <form action="#" method="POST">
+                <div class="comment-box">
+                    <label>Comment Section</label>
+                    <textarea placeholder="Leave your comment or report an issue..."></textarea>
+                </div>
+
+                <div class="feedback-actions">
+                    <button type="submit" class="submit-btn">Submit</button>
+                    <a href="development.html" class="next-btn">Next →</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Contact Info</a>
+                <a href="#">Useful Info</a>
+            </div>
+            <div class="social-icons">
+                <span>Social Media Icons</span>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © Copyright 2026 Horana Web Project. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
