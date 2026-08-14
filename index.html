@@ -1,0 +1,462 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+        }
+
+        /* ================= 1. STANDARD UNIFORM NAVBAR ================= */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14.5px;
+            font-weight: 600;
+            padding: 8px 0;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0f172a;
+        }
+
+        /* Dropdown Content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: #374151;
+            font-size: 13.5px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Bar Controls */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #search-toggle { display: none; }
+        .search-icon-btn { cursor: pointer; font-size: 16px; color: #374151; }
+        
+        .search-btn {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 200;
+            justify-content: center; align-items: flex-start; padding-top: 80px;
+        }
+
+        #search-toggle:checked ~ .search-modal { display: flex; }
+
+        .search-box-inner {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .search-box-inner input { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; }
+        .search-box-inner button { background: #1e293b; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+        .close-btn { background: #6b7280; color: #ffffff; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+
+        /* ================= 2. MAIN CONTAINER SIZE (MATCHES DISCOVER PAGE) ================= */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        .hero-title {
+            font-family: Georgia, serif;
+            font-size: 38px;
+            color: #475569;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        /* Hero Image Box */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #0f172a;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Content Heading */
+        .content-heading {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #1e293b;
+            line-height: 1.4;
+            max-width: 950px;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
+        /* Image Carousel Outer Box */
+        .carousel-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .carousel-item {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 180px;
+            background-color: #f1f5f9;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-next-btn {
+            position: absolute;
+            right: 10px;
+            top: 45%;
+            transform: translateY(-50%);
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Bottom Explore Button */
+        .explore-btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .explore-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 24px;
+            border-radius: 6px;
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .explore-btn:hover {
+            background: #f8fafc;
+        }
+
+        /* ================= 3. STANDARD UNIFORM DARK FOOTER ================= */
+        footer {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 60px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: #ffffff; }
+
+        .social-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            background-color: #1e293b;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .copyright-bar {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .container { padding: 20px; }
+            .carousel-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; }
+            footer { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+      <div class="navbar">
+        <a href="about.html" class="logo-section">
+            <span class="logo-badge">H</span>
+            <span class="logo-text">HORANA</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href=".html">Home</a></li>
+            
+            <li class="dropdown">
+                <span class="dropbtn">About Horana <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="about.html">About Horana</a>
+                    <a href="population.html">Population & Demographics</a>
+                    <a href="natural-features.html">Natural Features</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="history.html">History</a>
+                    <a href="location.html">Location</a>
+                    <a href="landmarks.html">Landmarks</a>
+                    <a href="geoportal.html">Geo-Portal Data</a>
+                    <a href="facilities.html">Facilities & Services</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="issues.html">Current Issues</a>
+                    <a href="development.html">Future Development</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <input type="checkbox" id="search-toggle">
+            <label for="search-toggle" class="search-icon-btn"><i class="fa fa-search"></i></label>
+            <label for="search-toggle" class="search-btn">Search</label>
+
+            <div class="search-modal">
+                <div class="search-box-inner">
+                    <input type="text" placeholder="Search Horana topics...">
+                    <button type="button">Search</button>
+                    <label for="search-toggle" class="close-btn">X</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        
+        <h1 class="hero-title">More than a place. It is our story.</h1>
+
+        <div class="hero-banner">
+            <img src="C:\Users\V I C T U S\Documents\Built Structure Assignment\New folder\Drone shot of Horana.jpeg" alt="Horana Aerial View" >
+            <div class="hero-badge">Drone Shot</div>
+        </div>
+
+        <h2 class="content-heading">
+            A unique blend of nature, heritage, community and modern urban life. Discover the history and character of Horana.
+        </h2>
+
+        <div class="carousel-box">
+            <div class="carousel-grid">
+                <div class="carousel-item">
+                    <img src="C:\Users\V I C T U S\Downloads\0.webp" alt="Horana View 1" >
+                </div>
+                <div class="carousel-item">
+                    <img src="C:\Users\V I C T U S\Downloads\temple.jpeg" alt="Horana View 2" >
+                </div>
+                <div class="carousel-item">
+                    <img src="C:\Users\V I C T U S\Downloads\WhatsApp Image 2026-08-09 at 14.08.39.jpeg" alt="Horana View 3" >
+                </div>
+                <div class="carousel-item">
+                    <img src="C:\Users\V I C T U S\Downloads\WhatsApp Image 2026-08-09 at 14.28.42.jpeg" alt="Horana View 4" >
+                </div>
+            </div>
+
+            <button class="carousel-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <div class="expl"ore-btn-wrapper">
+                <a href="about.html" class="explore-btn">Explore &rarr;</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Contact Info</a>
+                <a href="#">Useful Info</a>
+            </div>
+            <div class="social-icons">
+                <span>Social Media Icons</span>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © Copyright 2026 Horana Web Project. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
