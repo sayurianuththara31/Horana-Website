@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Development & My Vision - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        /* Header / Navbar */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-badge {
+            background: #111;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0066cc;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .search-btn-main {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .content-box {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .vision-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0066cc;
+        }
+
+        /* Next Button */
+        .next-wrap {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .next-btn {
+            background-color: #222;
+            color: #fff;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-badge">H</span> HORANA
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            
+            <li class="dropdown">
+                <button class="dropbtn">About Horana <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">About Horana</a>
+                    <a href="#">Location & Geographic Setting</a>
+                    <a href="#">Population & Demographics</a>
+                    <a href="#">Natural Features & Environment</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <button class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Geo Portal Data</a>
+                    <a href="#">Land Use Map</a>
+                    <a href="#">Road Network Map</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <button class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Current Issues & Challenges</a>
+                    <a href="#">My Vision</a>
+                    <a href="#">Future Development Properties</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-area">
+            <button class="search-btn-icon"><i class="fa fa-search"></i></button>
+            <button class="search-btn-main">Search</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="main-heading">Future Development & My Vision</h1>
+
+        <div class="content-box">
+            <div class="section-title">1. My Vision for Horana</div>
+            <p class="vision-text">
+                To transform Horana into a sustainable, smart, and well-connected regional hub that balances rapid industrial growth with environmental protection and a high quality of life for its residents.
+            </p>
+        </div>
+
+        <div class="content-box">
+            <div class="section-title">2. Key Future Development Properties</div>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="propertyName">Property / Project Title:</label>
+                    <input type="text" id="propertyName" name="propertyName" placeholder="Enter development proposal name">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="infrastructure">Infrastructure & Roads</option>
+                        <option value="environment">Eco-Park & Green Zones</option>
+                        <option value="industrial">Smart Industrial Zone</option>
+                        <option value="urban">Urban Renewal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Proposal Details:</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Describe the future development idea..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Proposal</button>
+            </form>
+        </div>
+
+        <div class="next-wrap">
+            <a href="#" class="next-btn">Next →</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Quick Links</a> |
+            <a href="#">Contact Info</a> |
+            <a href="#">Useful Info</a>
+        </div>
+        <p>© 2026 Horana Web Project. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

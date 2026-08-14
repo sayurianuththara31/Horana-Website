@@ -1,0 +1,460 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #ccc;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-badge {
+            background: #111;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0066cc;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Pure CSS Search Controls */
+        #search-toggle {
+            display: none;
+        }
+
+        .search-icon-btn {
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            padding: 5px;
+        }
+
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px;
+        }
+
+        #search-toggle:checked ~ .search-modal {
+            display: flex;
+        }
+
+        .search-box-inner {
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .search-box-inner input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-box-inner button {
+            background: #222;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            background: #888;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sub-heading {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Facilities Grid Layout */
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .facility-card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .facility-card h3 {
+            font-size: 16px;
+            margin: 0 0 10px 0;
+            color: #111;
+            text-transform: uppercase;
+        }
+
+        .card-img-box {
+            width: 100%;
+            height: 130px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background-color: #eee;
+        }
+
+        .card-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .facility-card p {
+            font-size: 13px;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Next Button */
+        .next-wrap {
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .next-btn {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #111;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .next-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #fff;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .social-icons a {
+            color: #fff;
+            background: #374151;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .copyright-bar {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-badge">H</span> HORANA
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            
+            <li class="dropdown">
+                <span class="dropbtn">About Horana <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="#">About Horana</a>
+                    <a href="#">Population & Demographics</a>
+                    <a href="#">Natural Features & Environment</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">History & Location <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="#">History</a>
+                    <a href="#">Location & Geographic Setting</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <span class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="#">Landmarks</a>
+                    <a href="#">Geospatial Data</a>
+                    <a href="#">Facilities</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-area">
+            <input type="checkbox" id="search-toggle">
+            <label for="search-toggle" class="search-icon-btn"><i class="fa fa-search"></i></label>
+
+            <div class="search-modal">
+                <div class="search-box-inner">
+                    <input type="text" placeholder="Search facilities...">
+                    <button type="button">Search</button>
+                    <label for="search-toggle" class="close-btn">X</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="main-heading">FACILITIES & SERVICES</h1>
+        <div class="sub-heading">Key Public Services Available in Horana</div>
+
+        <div class="facilities-grid">
+            
+            <div class="facility-card">
+                <h3>HEALTHCARE</h3>
+                <div class="card-img-box">
+                    <img src="healthcare.jpg" alt="Healthcare" onerror="this.src='https://via.placeholder.com/300x130?text=Healthcare'">
+                </div>
+                <p>Base Hospital Horana and medical centers providing 24/7 care.</p>
+            </div>
+
+            <div class="facility-card">
+                <h3>EDUCATION</h3>
+                <div class="card-img-box">
+                    <img src="education.jpg" alt="Education" onerror="this.src='https://via.placeholder.com/300x130?text=Education'">
+                </div>
+                <p>Prominent schools, national colleges, and vocational institutes.</p>
+            </div>
+
+            <div class="facility-card">
+                <h3>TRANSPORTATION</h3>
+                <div class="card-img-box">
+                    <img src="transport.jpg" alt="Transportation" onerror="this.src='https://via.placeholder.com/300x130?text=Transport'">
+                </div>
+                <p>Central bus stand and well-connected road networks.</p>
+            </div>
+
+            <div class="facility-card">
+                <h3>BANKING & FINANCE</h3>
+                <div class="card-img-box">
+                    <img src="banking.jpg" alt="Banking" onerror="this.src='https://via.placeholder.com/300x130?text=Banking'">
+                </div>
+                <p>Major public and private banks with ATM facilities townwide.</p>
+            </div>
+
+            <div class="facility-card">
+                <h3>RECREATION</h3>
+                <div class="card-img-box">
+                    <img src="recreation.jpg" alt="Recreation" onerror="this.src='https://via.placeholder.com/300x130?text=Recreation'">
+                </div>
+                <p>Public grounds, urban parks, and community fitness spaces.</p>
+            </div>
+
+            <div class="facility-card">
+                <h3>PUBLIC SERVICES</h3>
+                <div class="card-img-box">
+                    <img src="public_services.jpg" alt="Public Services" onerror="this.src='https://via.placeholder.com/300x130?text=Public+Services'">
+                </div>
+                <p>Urban Council, Police station, Post Office, and administrative hubs.</p>
+            </div>
+
+        </div>
+
+        <div class="next-wrap">
+            <a href="#" class="next-btn">Next →</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Contact Info</a>
+                <a href="#">Useful Info</a>
+            </div>
+            <div class="social-icons">
+                <span>Social Media Icons</span>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © Copyright 2026 Horana Web Project. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

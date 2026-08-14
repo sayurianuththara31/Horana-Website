@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Population & Demographics - Horana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-badge {
+            background: #111;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            color: #0066cc;
+        }
+
+        /* Dropdown menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Section */
+        .search-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .search-btn-main {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Page Layout */
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-box {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Distribution Lists & Progress Bars */
+        .progress-item {
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            height: 7px;
+            border-radius: 3px;
+        }
+
+        .progress-fill {
+            background-color: #0066cc;
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        /* Next Button */
+        .next-wrap {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .next-btn {
+            background-color: #222;
+            color: #fff;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-badge">H</span> HORANA
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            
+            <li class="dropdown">
+                <button class="dropbtn">About Horana <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">About Horana</a>
+                    <a href="#">Location & Geographic Setting</a>
+                    <a href="#">Population & Demographics</a>
+                    <a href="#">Natural Features & Environment</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <button class="dropbtn">Places & Data <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Geo Portal Data</a>
+                    <a href="#">Land Use Map</a>
+                    <a href="#">Road Network Map</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <button class="dropbtn">Future & Vision <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Current Issues & Challenges</a>
+                    <a href="#">My Vision</a>
+                    <a href="#">Future Development Properties</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-area">
+            <button class="search-btn-icon"><i class="fa fa-search"></i></button>
+            <button class="search-btn-main">Search</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="main-heading">POPULATION & DEMOGRAPHICS</h1>
+
+        <div class="grid-2">
+            <div class="card-box">
+                <div class="card-title">Population</div>
+                <p>Total Population (2021 Census): <b>115,450</b></p>
+                <p>Growth Rate: <b>1.2% (Annual)</b></p>
+            </div>
+
+            <div class="card-box">
+                <div class="card-title">Land Area</div>
+                <p>Total Land Area: <b>110.5 km²</b></p>
+                <p>Population Density: <b>1045 / km²</b></p>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="card-box">
+                <div class="card-title">Gender Distribution</div>
+                <p>Male: <b>49.2%</b></p>
+                <p>Female: <b>50.8%</b></p>
+            </div>
+
+            <div class="card-box">
+                <div class="card-title">Urban/Rural Grouping</div>
+                <p>Urban: <b>68%</b></p>
+                <p>Rural: <b>32%</b></p>
+            </div>
+
+            <div class="card-box">
+                <div class="card-title">Age Distribution</div>
+                <p>0-14: <b>24%</b></p>
+                <p>15-64: <b>65%</b></p>
+                <p>65+: <b>11%</b></p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card-box">
+                <div class="card-title">Ethnic Group Distribution</div>
+                
+                <div class="progress-item">
+                    <div class="progress-label"><span>Sinhalese</span><span>96.2%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 96%;"></div></div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Tamil</span><span>2.1%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 2.1%;"></div></div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Muslim</span><span>1.5%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 1.5%;"></div></div>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-title">Religious Group Distribution</div>
+
+                <div class="progress-item">
+                    <div class="progress-label"><span>Buddhist</span><span>95.8%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 95.8%;"></div></div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Hindu</span><span>2.3%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 2.3%;"></div></div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Islam</span><span>1.0%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 1.0%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="next-wrap">
+            <a href="#" class="next-btn">Next →</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Quick Links</a> |
+            <a href="#">Contact Info</a> |
+            <a href="#">Useful Info</a>
+        </div>
+        <p>© 2026 Horana Web Project. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
